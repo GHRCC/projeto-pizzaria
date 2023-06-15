@@ -1,15 +1,15 @@
 //aqui ficam as rotas da aplicação
 
-import { Router, Request, Response } from "express";
+import { Router } from "express";
+
+import { CreateUserController } from "./controllers/users/CreateUserController";
+import { AuthUserController } from "./controllers/users/AuthUserController";
 
 const router = Router();
 
-router.get("/teste", (req: Request, res: Response) => {
-  return res.json({ nome: "Lola's Pizzeria" });
-});
+//--ROTAS USER --
+router.post("/users", new CreateUserController().handle); //essa é a rota para criar usuário
 
-router.get("/teste-erro", (req: Request, res: Response) => {
-  throw new Error("Erro ao fazer a requisição"); //toda vez que quiser utilizar um "erro" na requisição, posso utilizar dessa maneira
-});
+router.post("/session", new AuthUserController().handle); //essa é a rota de login
 
 export { router };
