@@ -1,0 +1,85 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model User { //modelo que do que/como deve ter/ser na base de dados
+  id String @id @default (uuid()) //esse uuid faz com que gere automaticamente o ID
+  name String
+  email String
+  password String
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+
+  @@map("users")
+}
+
+model Category{ 
+  id String @id @default(uuid())
+  name String
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+
+  @@map("categories")
+  products Product[] //uma categoria pode estar cadastrada em vários produtos
+}
+
+model Product{
+  id String @id @default(uuid())
+  name String
+  price String
+  description String
+  banner String
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+
+
+category Category @relation(fields: [category_id], references: [id]) //criando a categoria
+  @@map("products")
+  category_id String //chave estrangeira
+  items Item[]
+
+}
+
+
+model Order {
+  id String @id @default(uuid())
+  table Int
+  status Boolean @default(false) //vai começar sempre como falso porque o pedido ainda precisa ser feito
+  draft Boolean @default(true) //o pedido vai sempre começar como rascunho, até que seja finalizado
+  name String? //interrogação diz que é opcional
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+
+  
+items Item[] //criando a relação de order com os items: dentro de um pedido, podem ter vários items. relação 1-n
+ @@map("orders")
+
+
+}
+
+model Item{
+  id String @id @default(uuid())
+  amount Int
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+
+order Order @relation(fields: [order_id], references: [id])
+product Product @relation(fields: [product_id], references: [id])
+
+
+@@map("items")
+
+order_id String
+product_id String
+}
+//criando uma migration: yarn prisma migrate dev
+
