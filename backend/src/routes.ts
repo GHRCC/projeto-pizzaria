@@ -6,6 +6,7 @@ import { CreateUserController } from "./controllers/users/CreateUserController";
 import { AuthUserController } from "./controllers/users/AuthUserController";
 import { DetailUserController } from "./controllers/users/DetailUserController";
 import { isAuthenticated } from "./middlewares/isAuthenticated";
+import { CreateCategoryController } from "./controllers/category/CreateCategoryController";
 
 const router = Router();
 
@@ -17,4 +18,11 @@ router.post("/session", new AuthUserController().handle); //essa é a rota de lo
 //aqui eu crio um middleware que verifica o token para saber se o usuário pode prosseguir ou não. Chamamos isso de middleware de autenticação. Ele fica no meio. Primeiro chama o middleware e depois chama a aplicação.
 router.get("/me", isAuthenticated, new DetailUserController().handle);
 
+//-- ROTAS CATEGORY --
+
+router.post(
+  "/category",
+  isAuthenticated,
+  new CreateCategoryController().handle
+);
 export { router };
