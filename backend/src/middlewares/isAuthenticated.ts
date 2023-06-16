@@ -20,6 +20,8 @@ export function isAuthenticated(
   try {
     //validar o token
     const { sub } = verify(token, process.env.JWT_SECRET) as PayLoad;
+    //recuperar o id do token e colocar dentro de uma variável user_id dentro do res
+    req.user_id = sub;
 
     return next();
   } catch (err) {
