@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useState } from "react";
 
 type AuthContextData = {
-  user: UserProps;
+  user: UserProps | null;
   isAuthenticated: boolean;
   signIn: (credentials: SignInProps) => Promise<void>;
 };
@@ -24,7 +24,7 @@ type AuthProviderProps = {
 export const AuthContext = createContext({} as AuthContextData);
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUser] = useState<UserProps>();
+  const [user, setUser] = useState<UserProps | null>(null);
   const isAuthenticated = !!user;
 
   async function signIn() {
