@@ -34,6 +34,10 @@
 "use client";
 
 import { useSession, signOut } from "next-auth/react";
+import Link from "next/link";
+import Image from "next/image";
+import AppBar from "@/components/appBar";
+import bgImage from "./public/bgImage.png";
 
 export default function Home() {
   const { data: session, status } = useSession({
@@ -45,9 +49,16 @@ export default function Home() {
   }
 
   return (
-    <div className="flex h-screen items-center justify-center">
-      This is a protected page.
-      <button onClick={() => signOut()}>Deslogar</button>
+    <div className="h-screen items-center justify-center">
+      <AppBar />
+      <Image
+        src={bgImage}
+        alt="logo"
+        width={0}
+        height={0}
+        sizes="100vw"
+        className="w-full h-full"
+      />
     </div>
   );
 }

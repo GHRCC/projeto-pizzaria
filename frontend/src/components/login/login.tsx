@@ -1,5 +1,4 @@
 import { InputHTMLAttributes, TextareaHTMLAttributes } from "react";
-
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
 interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
