@@ -50,7 +50,6 @@ export default function Home() {
 
   return (
     <div className="h-screen items-center justify-center">
-      <AppBar />
       <Image
         src={bgImage}
         alt="logo"

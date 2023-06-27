@@ -1,6 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import AppBar from "@/components/appBar";
+
 export default function Pizza() {
   const [estado, setEstado] = useState({});
 
