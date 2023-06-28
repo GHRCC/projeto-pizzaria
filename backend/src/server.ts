@@ -1,5 +1,6 @@
 //arquivo principal, quando eu rodar a aplicação é ele que vai rodar
-
+import * as dotenv from "dotenv";
+dotenv.config();
 import express, { Request, Response, NextFunction } from "express";
 import "express-async-errors"; //utilizar para criar uma barreira em cima de um middleware, caso haja algum erro, para que o usuário veja que houve erro. Segundo a biblioteca, esse import tem que ficar sempre em 2
 import { router } from "./routes";

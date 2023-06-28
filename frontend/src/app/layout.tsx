@@ -1,7 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import NextAuthSessionProvider from "./providers/sesssionProvider";
-import AppBar from "@/components/appBar";
+import AppBar from "../components/appBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
